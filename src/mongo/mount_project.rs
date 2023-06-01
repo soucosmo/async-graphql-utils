@@ -28,7 +28,7 @@ pub fn mount_project(fields: &SelectionField, project: &mut Document, father_fie
         }
     }
 
-    if !child_project.is_empty() {
+    if !child_project.is_empty() && father_field.is_some(){
         project.insert(father_field.unwrap(), child_project);
     }
 
