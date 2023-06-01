@@ -11,4 +11,5 @@ keywords = ["async-graphql", "mongodb"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+async-graphql = "5.0.9"
 mongodb = "2.5.0"
