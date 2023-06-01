@@ -1,1 +1,1 @@
-mod mongo;
+pub mod mongo;
