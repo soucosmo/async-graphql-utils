@@ -12,7 +12,7 @@ pub fn mount_project(fields: &SelectionField, project: &mut Document, father_fie
     for i in c {
         let field: &str = i.name();
 
-        if father_field.is_some() {
+        if father_field.is_none() {
             if field == "id" {
                 id_exists = true;
             } else {
