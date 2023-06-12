@@ -1,6 +1,6 @@
 [package]
 name = "async-graphql-utils"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 authors = ["Cosmo André"]
 description = "Inclui ajudantes para facilitar o desenvolvimento usando async-graphql"
