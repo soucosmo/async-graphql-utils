@@ -1,5 +1,5 @@
+use mongodb::bson::Decimal128 as Decimal128Mongo;
 use serde::{Serialize, Deserialize};
-use mongodb::bson::Decimal128;
 use async_graphql::{
     Value,
     Scalar,
@@ -9,16 +9,16 @@ use async_graphql::{
 };
 
 
-pub struct GDecimal128(pub Decimal128);
+pub struct Decimal128(pub Decimal128Mongo);
 
 
 #[Scalar]
-impl ScalarType for GDecimal128 {
+impl ScalarType for Decimal128 {
     fn parse(value: Value) -> InputValueResult<Self> {
         if let Value::String(value) = &value {
-            // Parse the Decimal128 value
-            let decimal = value.parse::<Decimal128>().map_err(InputValueError::custom)?;
-            Ok(GDecimal128(decimal))
+            // Parse the Decimal128Mongo value
+            let decimal = value.parse::<Decimal128Mongo>().map_err(InputValueError::custom)?;
+            Ok(Decimal128(decimal))
         } else {
             // If the type does not match
             Err(InputValueError::expected_type(value))
@@ -30,7 +30,7 @@ impl ScalarType for GDecimal128 {
     }
 }
 
-impl Serialize for GDecimal128 {
+impl Serialize for Decimal128 {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
@@ -39,18 +39,18 @@ impl Serialize for GDecimal128 {
     }
 }
 
-impl<'de> Deserialize<'de> for GDecimal128 {
+impl<'de> Deserialize<'de> for Decimal128 {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
-        let decimal = Decimal128::deserialize(deserializer)?;
-        Ok(GDecimal128(decimal))
+        let decimal = Decimal128Mongo::deserialize(deserializer)?;
+        Ok(Decimal128(decimal))
     }
 }
 
-impl Clone for GDecimal128 {
+impl Clone for Decimal128 {
     fn clone(&self) -> Self {
-        GDecimal128(self.0.clone())
+        Decimal128(self.0.clone())
     }
 }
