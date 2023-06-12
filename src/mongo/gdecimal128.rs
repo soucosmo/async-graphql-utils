@@ -1,3 +1,4 @@
+use serde::{Serialize, Deserialize};
 use mongodb::bson::Decimal128;
 use async_graphql::{
     Value,

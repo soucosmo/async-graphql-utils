@@ -13,3 +13,4 @@ keywords = ["async-graphql", "mongodb"]
 [dependencies]
 async-graphql = "5.0.9"
 mongodb = "2.5.0"
+serde = "1.0.164"
