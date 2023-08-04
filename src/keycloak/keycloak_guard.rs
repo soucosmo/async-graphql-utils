@@ -36,7 +36,7 @@ impl Guard for KeycloakGuard {
         }
 
         let open_id = OpenID::introspect(
-            keycloak.server_url.as_str(),
+            keycloak.server_url.as_str().trim_end_matches('/'),
             keycloak.realm_name.as_str(),
             keycloak.client_id.as_str(),
             keycloak.client_secret.as_str(),
