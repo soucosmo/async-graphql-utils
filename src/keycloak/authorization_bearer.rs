@@ -1,5 +1,5 @@
 pub struct AuthorizationBearer {
-    access_token: Option<String>,
+    pub access_token: Option<String>,
 }
 
 impl AuthorizationBearer {
