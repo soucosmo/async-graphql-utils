@@ -1,6 +1,6 @@
 [package]
 name = "async-graphql-utils"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2021"
 authors = ["Cosmo André"]
 description = "Inclui ajudantes para facilitar o desenvolvimento usando async-graphql"
@@ -15,4 +15,4 @@ async-graphql = "5.0.10"
 mongodb = "2.5.0"
 serde = "1.0.164"
 async-trait = "0.1.72"
-rs-keycloak = "0.2.1"
+rs-keycloak = "0.2.2"
