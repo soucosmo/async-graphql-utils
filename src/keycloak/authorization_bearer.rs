@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+
 pub struct AuthorizationBearer {
     pub access_token: Option<String>,
     pub custom_data: Option<HashMap<String, String>>,

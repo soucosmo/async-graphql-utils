@@ -1,4 +1,4 @@
-use super::{KeycloakConfig, AuthorizationBearer};
+use super::{KeycloakConfig, AuthorizationBearer, DecodedBearerToken};
 use async_graphql::{Guard, Context, Result};
 use rs_keycloak::client::OpenID;
 
@@ -48,6 +48,10 @@ impl Guard for KeycloakGuard {
         if self.check_all_roles {
             match open_id {
                 Ok(openid) => if openid.has_all_roles(check_roles) {
+                    let _ = ctx.data_opt::<DecodedBearerToken>().insert(&DecodedBearerToken {
+                        data: openid.get_decoded_token()
+                    });
+
                     Ok(())
                 } else {
                     Err("Unauthorized".into())
@@ -57,6 +61,10 @@ impl Guard for KeycloakGuard {
         } else {
             match open_id {
                 Ok(openid) => if openid.has_any_roles(check_roles) {
+                    let _ = ctx.data_opt::<DecodedBearerToken>().insert(&DecodedBearerToken {
+                        data: openid.get_decoded_token()
+                    });
+
                     Ok(())
                 } else {
                     Err("Unauthorized".into())
