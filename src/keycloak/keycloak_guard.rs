@@ -2,7 +2,6 @@ use super::{KeycloakConfig, AuthorizationBearer};
 use async_graphql::{Guard, Context, Result};
 use rs_keycloak::client::OpenID;
 
-
 pub struct KeycloakGuard {
     check_roles: Vec<String>,
     check_all_roles: bool,
@@ -27,6 +26,12 @@ impl Guard for KeycloakGuard {
         let bearer = bearer.get_access_token();
 
         if bearer.is_none() {
+            return Err("The Authorization header was not informed".into());
+        }
+
+        let bearer = bearer.unwrap();
+
+        if bearer.is_empty() {
             return Err("Token bearer not informed".into());
         }
 
@@ -35,7 +40,7 @@ impl Guard for KeycloakGuard {
             keycloak.realm_name.as_str(),
             keycloak.client_id.as_str(),
             keycloak.client_secret.as_str(),
-            bearer.unwrap().as_str(),
+            bearer.as_str(),
         );
 
         let check_roles = &self.check_roles.iter().map(|i| i.as_str()).collect::<Vec<&str>>();
